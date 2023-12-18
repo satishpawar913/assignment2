@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Posts List</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyRJQXlqjMDD99BA/N6F2UnF66HuZ009tl" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+	<style>
+		body {
+			display: flex;
+			min-height: 100vh;
+			margin: 0;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+		}
+
+		.content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 80%;
+		}
+
+		th,
+		td {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		a {
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		.action-buttons {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			margin-top: 10px;
+		}
+
+		.action-button {
+			margin: 0 8px;
+			padding: 5px 10px;
+			border-radius: 4px;
+			cursor: pointer;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+		}
+
+		.view-icon::before {
+			content: '\f06e';
+			/* FontAwesome view icon */
+			font-family: 'Font Awesome 5 Free';
+			margin-right: 4px;
+		}
+
+		.edit-icon::before {
+			content: '\f044';
+			/* FontAwesome edit icon */
+			font-family: 'Font Awesome 5 Free';
+			margin-right: 4px;
+		}
+
+		.delete-icon::before {
+			content: '\f1f8';
+			/* FontAwesome delete icon */
+			font-family: 'Font Awesome 5 Free';
+			margin-right: 4px;
+		}
+
+		.view-button {
+			background-color: #28a745;
+			/* Bootstrap success color */
+			color: white;
+			border: none;
+		}
+
+		.edit-button {
+			background-color: #007bff;
+			/* Bootstrap primary color */
+			color: white;
+			border: none;
+		}
+
+		.delete-button {
+			background-color: #dc3545;
+			/* Bootstrap danger color */
+			color: white;
+			border: none;
+		}
+
+		.add-button {
+			margin-top: 20px;
+			background-color: #007bff;
+			/* Bootstrap primary color */
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 4px;
+			cursor: pointer;
+			text-decoration: none;
+		}
+	</style>
+	<script>
+		function confirmDelete() {
+			return confirm("Are you sure you want to delete this post?");
+		}
+	</script>
+</head>
+
+<body>
+	<div class="content">
+		<h2>Posts List</h2>
+		<p th:text="${message}"></p>
+		<a class="add-button" th:href="@{/dummyapi/create}">Add New Posts</a>
+		<table>
+			<thead>
+				<tr>
+					<th>User ID</th>
+					<th>Post ID</th>
+					<th>Title</th>
+					<th>Body</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody th:if="${posts != null and not #lists.isEmpty(posts)}">
+				<tr th:each="post : ${posts}">
+					<td th:text="${post['userId']}"></td>
+					<td th:text="${post['id']}"></td>
+					<td th:text="${post['title']}"></td>
+					<td th:text="${post['body']}"></td>
+
+					<td class="action-buttons">
+						<div>
+							<a class="action-button view-button view-icon"
+								th:href="@{/dummyapi/view/{id}(id=${post['id']})}">View</a>
+						</div>
+						<div>
+							<a class="action-button edit-button edit-icon"
+								th:href="@{/dummyapi/edit/{id}(id=${post['id']})}">Edit</a>
+						</div>
+						<div>
+							<a class="action-button delete-button delete-icon"
+								th:href="@{/dummyapi/delete/{id}(id=${post['id']})}"
+								onclick="return confirmDelete()">Delete</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

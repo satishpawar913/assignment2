@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>View Post</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyRJQXlqjMDD99BA/N6F2UnF66HuZ009tl" crossorigin="anonymous">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			min-height: 100vh;
+			margin-top: 20px;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+		}
+
+		.content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		h2 {
+			color: #007bff;
+			
+		}
+
+		table {
+			margin-top: 20px;
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		a {
+			text-decoration: none;
+			color: #007bff;
+			cursor: pointer;
+			display: inline-block;
+			margin-top: 10px;
+			padding: 10px 20px;
+			background-color: #007bff;
+			/* Bootstrap primary color */
+			color: white;
+			border: none;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="content">
+		<h2>View Post</h2>
+		<table>
+			<tr>
+				<th>User ID</th>
+				<td><span th:text="${post['userId']}"></span></td>
+			</tr>
+			<tr>
+				<th>Post ID</th>
+				<td><span th:text="${post['id']}"></span></td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td><span th:text="${post['title']}"></span></td>
+			</tr>
+			<tr>
+				<th>Body</th>
+				<td><span th:text="${post['body']}"></span></td>
+			</tr>
+		</table>
+		<a th:href="@{/dummyapi/list}">Back to List</a>
+	</div>
+</body>
+
+</html>
